@@ -169,42 +169,48 @@ namespace Upload.Services.Process
         {
             await Task.Run(() =>
             {
-                foreach (var model in fileModels)
+                try
                 {
-                    if (tk.IsCancellationRequested)
+                    foreach (var model in fileModels)
                     {
-                        return;
-                    }
-                    var job = new SftpJob
-                    {
-                        Execute = async (sftp) =>
+                        if (tk.IsCancellationRequested)
                         {
-                            var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
-                            if (tk.IsCancellationRequested)
+                            return;
+                        }
+                        var job = new SftpJob
+                        {
+                            Execute = async (sftp) =>
                             {
-                                rs.SetResult(false, $"Delete canceled!: {model.ProgramPath}");
-                                return rs;
-                            }
-                            try
-                            {
-                                if (await sftp.Exists(model.RemotePath) && !await sftp.DeleteFile(model.RemotePath))
+                                var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
+                                if (tk.IsCancellationRequested)
                                 {
-                                    rs.SetResult(false, $"Delete: {model.ProgramPath} failed!");
+                                    rs.SetResult(false, $"Delete canceled!: {model.ProgramPath}");
                                     return rs;
                                 }
-                                rs.SetResult(false, $"Delete: {model.ProgramPath} ok");
-                                return rs;
+                                try
+                                {
+                                    if (await sftp.Exists(model.RemotePath) && !await sftp.DeleteFile(model.RemotePath))
+                                    {
+                                        rs.SetResult(false, $"Delete: {model.ProgramPath} failed!");
+                                        return rs;
+                                    }
+                                    rs.SetResult(false, $"Delete: {model.ProgramPath} ok");
+                                    return rs;
+                                }
+                                catch (Exception ex)
+                                {
+                                    rs.SetResult(false, $"{ex.Message}: Delete -> {model.RemotePath}");
+                                    return rs;
+                                }
                             }
-                            catch (Exception ex)
-                            {
-                                rs.SetResult(false, $"{ex.Message}: Delete -> {model.RemotePath}");
-                                return rs;
-                            }
-                        }
-                    };
-                    processSignals.Add(sftpWorkerPool.Enqueue(job));
+                        };
+                        processSignals.Add(sftpWorkerPool.Enqueue(job));
+                    }
                 }
-                processSignals.CompleteAdding();
+                finally
+                {
+                    processSignals.CompleteAdding();
+                }
             });
         }
         private async Task EnqueueDownloadStoreFile(ICollection<FileModel> fileModels,
@@ -214,40 +220,124 @@ namespace Upload.Services.Process
         {
             await Task.Run(() =>
             {
-                foreach (var model in fileModels)
+                try
                 {
-                    if (tk.IsCancellationRequested)
+                    foreach (var model in fileModels)
                     {
-                        return;
-                    }
-                    var job = new SftpJob
-                    {
-                        Execute = async (sftp) =>
+                        if (tk.IsCancellationRequested)
                         {
-                            var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
-                            if (tk.IsCancellationRequested)
+                            return;
+                        }
+                        var job = new SftpJob
+                        {
+                            Execute = async (sftp) =>
                             {
-                                rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
-                                return rs;
+                                var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
+                                if (tk.IsCancellationRequested)
+                                {
+                                    rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
+                                    return rs;
+                                }
+                                if (dirPath == null)
+                                {
+                                    rs.SetResult(false, "download folder == null!");
+                                    return rs;
+                                }
+                                if (!Directory.Exists(dirPath))
+                                {
+                                    rs.SetResult(false, $"download folder is not exists: {model.ProgramPath}");
+                                    return rs;
+                                }
+                                string storePath = Path.Combine(dirPath, model.ProgramPath);
+                                if (cacheService.TryCopyFileTo(model.Md5, storePath))
+                                {
+                                    rs.SetResult(true, $"Copy from Cache -> {storePath}");
+                                    return rs;
+                                }
+                                else
+                                {
+                                    if (tk.IsCancellationRequested)
+                                    {
+                                        rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
+                                        return rs;
+                                    }
+                                    if (!sftp.IsConnected)
+                                    {
+                                        rs.SetResult(false, $"Cannot connect to SFTP server: {model.ProgramPath}");
+                                        return rs;
+                                    }
+                                    try
+                                    {
+
+                                        using (Stream stream = await sftp.DownloadFileToStreamAsync(model.RemotePath))
+                                        {
+                                            if (ZipHelper.ExtractSingleFileFromStream(stream, storePath, zipPassword) && cacheService.Add(storePath, model.Md5, out var _))
+                                            {
+                                                rs.SetResult(true, $"Download: {model.ProgramPath} -> {model.RemotePath} ok");
+                                            }
+                                            else
+                                            {
+                                                rs.SetResult(false, $"Download: {model.ProgramPath} -> {model.RemotePath} failed!");
+                                            }
+                                        }
+                                        return rs;
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        rs.SetResult(false, $"{ex.Message}: {model.ProgramPath} -> {model.RemotePath}");
+                                        return rs;
+                                    }
+                                }
                             }
-                            if (dirPath == null)
+                        };
+                        processSignals.Add(sftpWorkerPool.Enqueue(job));
+                    }
+                }
+                finally
+                {
+                    processSignals.CompleteAdding();
+                }
+            });
+        }
+
+        private async Task EnqueueUploadStoreFile(ICollection<StoreFileModel> fileModels,
+            BlockingCollection<IProcessSignal> processSignals,
+            CancellationToken tk, string zipPassword)
+        {
+            await Task.Run(() =>
+            {
+                try
+                {
+                    foreach (var model in fileModels)
+                    {
+                        if (tk.IsCancellationRequested)
+                        {
+                            return;
+                        }
+                        var job = new SftpJob
+                        {
+                            Execute = async (sftp) =>
                             {
-                                rs.SetResult(false, "download folder == null!");
-                                return rs;
-                            }
-                            if (!Directory.Exists(dirPath))
-                            {
-                                rs.SetResult(false, $"download folder is not exists: {model.ProgramPath}");
-                                return rs;
-                            }
-                            string storePath = Path.Combine(dirPath, model.ProgramPath);
-                            if (cacheService.TryCopyFileTo(model.Md5, storePath))
-                            {
-                                rs.SetResult(true, $"Copy from Cache -> {storePath}");
-                                return rs;
-                            }
-                            else
-                            {
+                                var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
+                                if (tk.IsCancellationRequested)
+                                {
+                                    rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
+                                    return false;
+                                }
+                                model.Md5 = Util.GetMD5HashFromFile(model.StorePath);
+                                model.RemotePath = Path.Combine(model.RemoteDir, $"{model.Md5}.zip");
+                                if (!cacheService.TryGetCache(model.Md5, out var cacheModel)
+                                && !cacheService.Add(model.StorePath, model.Md5, out cacheModel))
+                                {
+                                    rs.SetResult(false, $"Add file({model.ProgramPath}) to Cache failed!");
+                                    return false;
+                                }
+                                if (!FileSizeConverter.TryGetMb(cacheModel.FilePath, out double mb))
+                                {
+                                    rs.SetResult(false, $"Cache file({model.ProgramPath}: {cacheModel.FilePath}) is not exist!");
+                                    return false;
+                                }
+                                model.Mb = mb;
                                 if (tk.IsCancellationRequested)
                                 {
                                     rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
@@ -260,16 +350,22 @@ namespace Upload.Services.Process
                                 }
                                 try
                                 {
-
-                                    using (Stream stream = await sftp.DownloadFileToStreamAsync(model.RemotePath))
+                                    if (await sftp.Exists(model.RemotePath))
                                     {
-                                        if (ZipHelper.ExtractSingleFileFromStream(stream, storePath, zipPassword) && cacheService.Add(storePath, model.Md5, out var _))
+                                        rs.SetResult(true, $"Upload: {model.ProgramPath} -> {model.RemotePath} has exists");
+                                    }
+                                    else
+                                    {
+                                        using (Stream stream = ZipHelper.ZipSingleFiletoStream(model.RemotePath, cacheModel.FilePath, zipPassword))
                                         {
-                                            rs.SetResult(true, $"Download: {model.ProgramPath} -> {model.RemotePath} ok");
-                                        }
-                                        else
-                                        {
-                                            rs.SetResult(false, $"Download: {model.ProgramPath} -> {model.RemotePath} failed!");
+                                            if (await sftp.UploadStreamFileAsync(stream, model.RemotePath))
+                                            {
+                                                rs.SetResult(true, $"Upload: {model.ProgramPath} -> {model.RemotePath} ok");
+                                            }
+                                            else
+                                            {
+                                                rs.SetResult(false, $"Upload: {model.ProgramPath} -> {model.RemotePath} failed!");
+                                            }
                                         }
                                     }
                                     return rs;
@@ -280,92 +376,14 @@ namespace Upload.Services.Process
                                     return rs;
                                 }
                             }
-                        }
-                    };
-                    processSignals.Add(sftpWorkerPool.Enqueue(job));
-                }
-                processSignals.CompleteAdding();
-            });
-        }
-
-        private async Task EnqueueUploadStoreFile(ICollection<StoreFileModel> fileModels,
-            BlockingCollection<IProcessSignal> processSignals,
-            CancellationToken tk, string zipPassword)
-        {
-            await Task.Run(() =>
-            {
-                foreach (var model in fileModels)
-                {
-                    if (tk.IsCancellationRequested)
-                    {
-                        return;
+                        };
+                        processSignals.Add(sftpWorkerPool.Enqueue(job));
                     }
-                    var job = new SftpJob
-                    {
-                        Execute = async (sftp) =>
-                        {
-                            var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
-                            if (tk.IsCancellationRequested)
-                            {
-                                rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
-                                return false;
-                            }
-                            model.Md5 = Util.GetMD5HashFromFile(model.StorePath);
-                            model.RemotePath = Path.Combine(model.RemoteDir, $"{model.Md5}.zip");
-                            if (!cacheService.TryGetCache(model.Md5, out var cacheModel)
-                            && !cacheService.Add(model.StorePath, model.Md5, out cacheModel))
-                            {
-                                rs.SetResult(false, $"Add file({model.ProgramPath}) to Cache failed!");
-                                return false;
-                            }
-                            if (!FileSizeConverter.TryGetMb(cacheModel.FilePath, out double mb))
-                            {
-                                rs.SetResult(false, $"Cache file({model.ProgramPath}: {cacheModel.FilePath}) is not exist!");
-                                return false;
-                            }
-                            model.Mb = mb;
-                            if (tk.IsCancellationRequested)
-                            {
-                                rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
-                                return rs;
-                            }
-                            if (!sftp.IsConnected)
-                            {
-                                rs.SetResult(false, $"Cannot connect to SFTP server: {model.ProgramPath}");
-                                return rs;
-                            }
-                            try
-                            {
-                                if (await sftp.Exists(model.RemotePath))
-                                {
-                                    rs.SetResult(true, $"Upload: {model.ProgramPath} -> {model.RemotePath} has exists");
-                                }
-                                else
-                                {
-                                    using (Stream stream = ZipHelper.ZipSingleFiletoStream(model.RemotePath, cacheModel.FilePath, zipPassword))
-                                    {
-                                        if (await sftp.UploadStreamFileAsync(stream, model.RemotePath))
-                                        {
-                                            rs.SetResult(true, $"Upload: {model.ProgramPath} -> {model.RemotePath} ok");
-                                        }
-                                        else
-                                        {
-                                            rs.SetResult(false, $"Upload: {model.ProgramPath} -> {model.RemotePath} failed!");
-                                        }
-                                    }
-                                }
-                                return rs;
-                            }
-                            catch (Exception ex)
-                            {
-                                rs.SetResult(false, $"{ex.Message}: {model.ProgramPath} -> {model.RemotePath}");
-                                return rs;
-                            }
-                        }
-                    };
-                    processSignals.Add(sftpWorkerPool.Enqueue(job));
                 }
-                processSignals.CompleteAdding();
+                finally
+                {
+                    processSignals.CompleteAdding();
+                }
             });
         }
 
