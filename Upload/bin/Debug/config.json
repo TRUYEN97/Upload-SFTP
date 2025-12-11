@@ -1,0 +1,12 @@
+{
+  "TempDir": "./temp",
+  "SftpConfig": {
+    "Host": "127.0.0.1",
+    "Port": 4422,
+    "User": "oper",
+    "Password": "foxconn168!!"
+  },
+  "RemotePath": "/AutoDownload/NPI/EOT",
+  "Password": "e10adc3949ba59abbe56e057f20f883e",
+  "CacheDir": "D:/Common"
+}

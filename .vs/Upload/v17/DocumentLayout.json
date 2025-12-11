@@ -1,0 +1,121 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\new folder\\ui-upload-sftp\\upload\\services\\locationcreater.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\locationcreater.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\New folder\\UI-Upload-Sftp\\upload\\common\\modelutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\common\\modelutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\New folder\\UI-Upload-Sftp\\upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\New folder\\UI-Upload-Sftp\\upload\\modelview\\mytreefolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\modelview\\mytreefolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\New folder\\UI-Upload-Sftp\\upload\\services\\mytreeactional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\mytreeactional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\New folder\\UI-Upload-Sftp\\upload\\services\\worker\\implement\\workeriplm\\baseworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\worker\\implement\\workeriplm\\baseworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "LocationCreater.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\LocationCreater.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\LocationCreater.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\LocationCreater.cs",
+              "RelativeToolTip": "Upload\\Services\\LocationCreater.cs",
+              "ViewState": "AgIAAEMBAAAAAAAAAADwv2ABAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:41:45.094Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ModelUtil.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\common\\ModelUtil.cs",
+              "RelativeDocumentMoniker": "Upload\\common\\ModelUtil.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\common\\ModelUtil.cs",
+              "RelativeToolTip": "Upload\\common\\ModelUtil.cs",
+              "ViewState": "AgIAAGgAAAAAAAAAAADwv3kAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:21:10.21Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Uploader.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\Uploader.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\Uploader.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\Uploader.cs",
+              "RelativeToolTip": "Upload\\Services\\Uploader.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAuwFMAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:20:45.623Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "MyTreeFolder.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\ModelView\\MyTreeFolder.cs",
+              "RelativeDocumentMoniker": "Upload\\ModelView\\MyTreeFolder.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\ModelView\\MyTreeFolder.cs",
+              "RelativeToolTip": "Upload\\ModelView\\MyTreeFolder.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAWwB4AAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:19:26.254Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "MyTreeActional.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\MyTreeActional.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\MyTreeActional.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\MyTreeActional.cs",
+              "RelativeToolTip": "Upload\\Services\\MyTreeActional.cs",
+              "ViewState": "AgIAAJIBAAAAAAAAAADwv60BAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:18:24.892Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BaseWorker.cs",
+              "DocumentMoniker": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
+              "ToolTip": "D:\\2.C#\\New folder\\UI-Upload-Sftp\\Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
+              "RelativeToolTip": "Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-11T08:14:55.789Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

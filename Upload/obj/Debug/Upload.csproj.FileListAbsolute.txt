@@ -1,0 +1,159 @@
+D:\C#\Upload\Upload\bin\Debug\Upload.exe.config
+D:\C#\Upload\Upload\bin\Debug\Upload.exe
+D:\C#\Upload\Upload\bin\Debug\Upload.pdb
+D:\C#\Upload\Upload\bin\Debug\BouncyCastle.Cryptography.dll
+D:\C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\C#\Upload\Upload\bin\Debug\MetroFramework.Design.dll
+D:\C#\Upload\Upload\bin\Debug\MetroFramework.dll
+D:\C#\Upload\Upload\bin\Debug\MetroFramework.Fonts.dll
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\C#\Upload\Upload\bin\Debug\Newtonsoft.Json.dll
+D:\C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.dll
+D:\C#\Upload\Upload\bin\Debug\Renci.SshNet.Async.dll
+D:\C#\Upload\Upload\bin\Debug\Renci.SshNet.dll
+D:\C#\Upload\Upload\bin\Debug\System.Buffers.dll
+D:\C#\Upload\Upload\bin\Debug\System.Formats.Asn1.dll
+D:\C#\Upload\Upload\bin\Debug\System.Memory.dll
+D:\C#\Upload\Upload\bin\Debug\System.Numerics.Vectors.dll
+D:\C#\Upload\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\C#\Upload\Upload\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\C#\Upload\Upload\bin\Debug\System.ValueTuple.dll
+D:\C#\Upload\Upload\bin\Debug\BouncyCastle.Cryptography.xml
+D:\C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.xml
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\C#\Upload\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\C#\Upload\Upload\bin\Debug\Newtonsoft.Json.xml
+D:\C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.pdb
+D:\C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.xml
+D:\C#\Upload\Upload\bin\Debug\Renci.SshNet.xml
+D:\C#\Upload\Upload\bin\Debug\Renci.SshNet.Async.xml
+D:\C#\Upload\Upload\bin\Debug\System.Buffers.xml
+D:\C#\Upload\Upload\bin\Debug\System.Formats.Asn1.xml
+D:\C#\Upload\Upload\bin\Debug\System.Memory.xml
+D:\C#\Upload\Upload\bin\Debug\System.Numerics.Vectors.xml
+D:\C#\Upload\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\C#\Upload\Upload\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\C#\Upload\Upload\bin\Debug\System.ValueTuple.xml
+D:\C#\Upload\Upload\obj\Debug\Upload.csproj.AssemblyReference.cache
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.AccessUserControl.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.ConfirmOverrideForm.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.FormMain.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.AccessUserListForm.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.UserForm.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.InputForm.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.gui.ProgressDialogForm.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.Properties.Resources.resources
+D:\C#\Upload\Upload\obj\Debug\Upload.csproj.GenerateResource.cache
+D:\C#\Upload\Upload\obj\Debug\Upload.csproj.CoreCompileInputs.cache
+D:\C#\Upload\Upload\obj\Debug\Upload.csproj.Up2Date
+D:\C#\Upload\Upload\obj\Debug\Upload.exe
+D:\C#\Upload\Upload\obj\Debug\Upload.pdb
+D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.AssemblyReference.cache
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.AccessUserControl.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.ConfirmOverrideForm.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.FormMain.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.AccessUserListForm.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.UserForm.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.InputForm.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.ProgressDialogForm.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.Properties.Resources.resources
+D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.GenerateResource.cache
+D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.CoreCompileInputs.cache
+D:\2.C#\Upload\Upload\obj\Debug\Upload.exe
+D:\2.C#\Upload\Upload\obj\Debug\Upload.pdb
+D:\2.C#\Upload\Upload\bin\Debug\Upload.exe.config
+D:\2.C#\Upload\Upload\bin\Debug\Upload.exe
+D:\2.C#\Upload\Upload\bin\Debug\Upload.pdb
+D:\2.C#\Upload\Upload\bin\Debug\BouncyCastle.Cryptography.dll
+D:\2.C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\2.C#\Upload\Upload\bin\Debug\MetroFramework.Design.dll
+D:\2.C#\Upload\Upload\bin\Debug\MetroFramework.dll
+D:\2.C#\Upload\Upload\bin\Debug\MetroFramework.Fonts.dll
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\2.C#\Upload\Upload\bin\Debug\Newtonsoft.Json.dll
+D:\2.C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Buffers.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Formats.Asn1.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Memory.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Numerics.Vectors.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\2.C#\Upload\Upload\bin\Debug\System.ValueTuple.dll
+D:\2.C#\Upload\Upload\bin\Debug\BouncyCastle.Cryptography.xml
+D:\2.C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\2.C#\Upload\Upload\bin\Debug\ICSharpCode.SharpZipLib.xml
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\2.C#\Upload\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\2.C#\Upload\Upload\bin\Debug\Newtonsoft.Json.xml
+D:\2.C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.pdb
+D:\2.C#\Upload\Upload\bin\Debug\Ookii.Dialogs.Wpf.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Buffers.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Formats.Asn1.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Memory.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Numerics.Vectors.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\2.C#\Upload\Upload\bin\Debug\System.ValueTuple.xml
+D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.Up2Date
+D:\2.C#\Upload\Upload\bin\Debug\WinSCP.exe
+D:\2.C#\Upload\Upload\bin\Debug\WinSCPnet.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\WinSCP.exe
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Upload.exe.config
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Upload.exe
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Upload.pdb
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\BouncyCastle.Cryptography.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\MetroFramework.Design.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\MetroFramework.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\MetroFramework.Fonts.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Newtonsoft.Json.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Ookii.Dialogs.Wpf.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Buffers.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Formats.Asn1.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Memory.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Numerics.Vectors.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Threading.Tasks.Extensions.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.ValueTuple.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\WinSCPnet.dll
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\BouncyCastle.Cryptography.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\ICSharpCode.SharpZipLib.pdb
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\ICSharpCode.SharpZipLib.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Bcl.AsyncInterfaces.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Extensions.DependencyInjection.Abstractions.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Microsoft.Extensions.Logging.Abstractions.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Newtonsoft.Json.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Ookii.Dialogs.Wpf.pdb
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\Ookii.Dialogs.Wpf.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Buffers.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Formats.Asn1.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Memory.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Numerics.Vectors.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.Threading.Tasks.Extensions.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\bin\Debug\System.ValueTuple.xml
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.csproj.AssemblyReference.cache
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.exe.config
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.AccessUserControl.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.ConfirmOverrideForm.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.FormMain.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.AccessUserListForm.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.UserForm.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.InputForm.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.gui.ProgressDialogForm.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.Properties.Resources.resources
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.csproj.GenerateResource.cache
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.csproj.CoreCompileInputs.cache
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.csproj.Up2Date
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.exe
+D:\2.C#\New folder\UI-Upload-Sftp\Upload\obj\Debug\Upload.pdb
