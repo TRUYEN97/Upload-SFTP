@@ -10,6 +10,8 @@ using Upload.gui;
 using Upload.Model;
 using Upload.ModelView;
 using Upload.Services.Process;
+using Upload.Services.Worker.Implement.JobIplm;
+using Upload.Services.Worker.Implement.WorkerPoolIplm;
 using static Upload.Services.LockManager;
 
 namespace Upload.Services
@@ -79,8 +81,14 @@ namespace Upload.Services
                             //////////////////////////////
                             if (await ModelUtil.UploadModel(appModel, appModel.Path, zipPassword))
                             {
-                                AppList appList = await ModelUtil.GetModelConfig<AppList>(appModel.RemoteAppListPath, zipPassword);
-                                HashSet<FileModel> canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(showerModel.RemoveFileModel, appList, zipPassword);
+                                var appList = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                                {
+                                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AppList>(sftp, appModel.RemoteAppListPath, zipPassword)
+                                }).WaitAsync<AppList>();
+                                var canDeletes = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                                {
+                                    Execute = async (sftp) => await ModelUtil.GetCanDeleteFileModelsAsync(sftp, showerModel.RemoveFileModel, appList, zipPassword)
+                                }).WaitAsync<HashSet<FileModel>>();
                                 await ModelUtil.RemoveRemoteFile(canDeletes);
                                 await locationManagement.UpdateProgramListItems(locationManagement?.Location?.AppName);
                                 LoggerBox.Addlog("update done");
@@ -119,7 +127,10 @@ namespace Upload.Services
 
         private async Task Show(string programDataPath, CancellationTokenSource cts)
         {
-            AppModel appModel = await ModelUtil.GetModelConfig<AppModel>(programDataPath, zipPassword);
+            var appModel = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+            {
+                Execute = async (sftp) => await ModelUtil.GetModelConfig<AppModel>(sftp, programDataPath, zipPassword)
+            }).WaitAsync<AppModel>();
             if (appModel == null)
             {
                 ResetProgramData();

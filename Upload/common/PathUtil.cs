@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using Upload.Config;
 
 namespace Upload.Common
@@ -14,55 +13,63 @@ namespace Upload.Common
 
         internal static string GetProductPath(Location location)
         {
-            return Path.Combine(GetRemotePath(),location.Product);
+            return ToSftpPath(Path.Combine(GetRemotePath(), location.Product));
         }
 
         internal static string GetStationPath(Location location)
         {
-            return Path.Combine(GetProductPath(location),location.Station);
+            return ToSftpPath(Path.Combine(GetProductPath(location), location.Station));
         }
 
         internal static string GetProgramFolderPath(Location location)
         {
-            return Path.Combine(GetStationPath(location), "Program");
+            return ToSftpPath(Path.Combine(GetStationPath(location), "Program"));
         }
 
         internal static string GetAppModelPath(Location location)
         {
-            return Path.Combine(GetProgramFolderPath(location), $"{location.AppName}_AppModel.zip");
+            return ToSftpPath(Path.Combine(GetProgramFolderPath(location), $"{location.AppName}_AppModel.zip"));
         }
 
         internal static string GetAppAccessUserPath(Location location)
         {
-            return Path.Combine(GetProgramFolderPath(location), $"{location.AppName}_AccessUserList.zip");
+            return ToSftpPath(Path.Combine(GetProgramFolderPath(location), $"{location.AppName}_AccessUserList.zip"));
         }
-        
+
         internal static string GetStationAccessUserPath(Location location)
         {
-            return Path.Combine(GetStationPath(location), "AccessUserList.zip");
+            return ToSftpPath(Path.Combine(GetStationPath(location), "AccessUserList.zip"));
         }
 
         internal static string GetAppConfigRemotePath(Location location)
         {
-            return Path.Combine(GetStationPath(location), "Apps.zip");
+            return ToSftpPath(Path.Combine(GetStationPath(location), "Apps.zip"));
         }
 
         internal static string GetCommonPath(Location location)
         {
-            return Path.Combine(GetStationPath(location),"Common");
+            return ToSftpPath(Path.Combine(GetStationPath(location), "Common"));
         }
 
         internal static string GetUiStoreRemoteFolder()
         {
-            return Path.Combine(GetRemotePath(), "UiStoreUpdate");
+            return ToSftpPath(Path.Combine(GetRemotePath(), "UiStoreUpdate"));
         }
         internal static string GetUiStoreRemotePath()
         {
-            return Path.Combine(GetUiStoreRemoteFolder(), "UiStoreModel.zip");
+            return ToSftpPath(Path.Combine(GetUiStoreRemoteFolder(), "UiStoreModel.zip"));
         }
         internal static string GetUiStoreRemoteCommonPath()
         {
-            return Path.Combine(GetUiStoreRemoteFolder(), "Common");
+            return ToSftpPath(Path.Combine(GetUiStoreRemoteFolder(), "Common"));
+        }
+        private static string ToSftpPath(string path)
+        {
+            if (string.IsNullOrWhiteSpace(path))
+            {
+                return null;
+            }
+            return path.Replace('\\', '/');
         }
     }
 }

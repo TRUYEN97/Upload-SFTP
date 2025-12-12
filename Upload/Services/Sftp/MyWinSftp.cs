@@ -140,20 +140,7 @@
                 {
                     try
                     {
-                        remoteFolder = remoteFolder.Replace("\\", "/");
-                        string dir = "/";
-                        foreach (var folderName in remoteFolder.Split('/'))
-                        {
-                            if (string.IsNullOrWhiteSpace(folderName))
-                            {
-                                continue;
-                            }
-                            dir += folderName;
-                            if (!_session.FileExists(dir))
-                            {
-                                _session.CreateDirectory(dir);
-                            }
-                        }
+                        CreateDir(remoteFolder);
                         return true;
                     }
                     catch
@@ -163,6 +150,7 @@
                 });
             });
         }
+
         public async Task<bool> DeleteFile(string remote)
         {
             return await RetryAsync(async () =>
@@ -292,11 +280,8 @@
                         {
                             TransferMode = TransferMode.Binary
                         };
+                        CreateDir(Path.GetDirectoryName(remotePath));
                         Log($"Uploading: {localPath} → {remotePath}");
-                        if (!_session.FileExists(Path.GetDirectoryName(remotePath)))
-                        {
-                            _session.CreateDirectory(Path.GetDirectoryName(remotePath));
-                        }
                         var result = _session.PutFiles(localPath, remotePath, false, opts);
                         result.Check();
                         Log("Upload OK");
@@ -327,11 +312,8 @@
                             OverwriteMode = OverwriteMode.Overwrite
                         };
                         remotePath = remotePath.Replace("\\", "/");
+                        CreateDir(Path.GetDirectoryName(remotePath));
                         Log($"Uploading stream -> {remotePath}");
-                        if (!_session.FileExists(Path.GetDirectoryName(remotePath)))
-                        {
-                            _session.CreateDirectory(Path.GetDirectoryName(remotePath));
-                        }
                         _session.PutFile(stream, remotePath, opts);
                         Log("Upload OK");
                         return true;
@@ -397,6 +379,29 @@
                     return true;
                 });
             });
+        }
+
+        private void CreateDir(string remoteFolder)
+        {
+            if (string.IsNullOrWhiteSpace(remoteFolder))
+            {
+                return;
+            }
+            List<string> parents = new List<string>() { remoteFolder.Replace("\\", "/") };
+            var parentInfo = Path.GetDirectoryName(remoteFolder).Replace("\\", "/");
+            while (!_session.FileExists(parentInfo))
+            {
+                parents.Add(parentInfo);
+                parentInfo = Path.GetDirectoryName(parentInfo).Replace("\\", "/");
+            }
+            parents.Reverse();
+            foreach (var parent in parents)
+            {
+                if (!_session.FileExists(parent))
+                {
+                    _session.CreateDirectory(parent);
+                }
+            }
         }
 
         public void Dispose()

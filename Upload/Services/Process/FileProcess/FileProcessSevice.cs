@@ -322,7 +322,7 @@ namespace Upload.Services.Process
                                 if (tk.IsCancellationRequested)
                                 {
                                     rs.SetResult(false, $"Canceled!: {model.ProgramPath}");
-                                    return false;
+                                    return rs;
                                 }
                                 model.Md5 = Util.GetMD5HashFromFile(model.StorePath);
                                 model.RemotePath = Path.Combine(model.RemoteDir, $"{model.Md5}.zip");
@@ -330,12 +330,12 @@ namespace Upload.Services.Process
                                 && !cacheService.Add(model.StorePath, model.Md5, out cacheModel))
                                 {
                                     rs.SetResult(false, $"Add file({model.ProgramPath}) to Cache failed!");
-                                    return false;
+                                    return rs;
                                 }
                                 if (!FileSizeConverter.TryGetMb(cacheModel.FilePath, out double mb))
                                 {
                                     rs.SetResult(false, $"Cache file({model.ProgramPath}: {cacheModel.FilePath}) is not exist!");
-                                    return false;
+                                    return rs;
                                 }
                                 model.Mb = mb;
                                 if (tk.IsCancellationRequested)

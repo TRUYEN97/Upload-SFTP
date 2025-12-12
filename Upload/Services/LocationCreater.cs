@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Upload.Common;
@@ -98,6 +99,7 @@ namespace Upload.Services
             try
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
+                ThreadPool.GetAvailableThreads(out int wk, out int completionPortThreads);
                 return await sftpWorkerPool.Enqueue(new SftpJob()
                 {
                     Execute = async (sftp) =>
@@ -153,7 +155,7 @@ namespace Upload.Services
                             Util.ShowDeletedMessager("Station", loca.Station);
                             return true;
                         }
-                        var (appList, _) = await ModelUtil.GetAppListModel(loca, zipPassword);
+                        var (appList, _) = await ModelUtil.GetAppListModel(sftp, loca, zipPassword);
                         if (appList?.ProgramPaths == null || appList?.ProgramPaths.Count == 0)
                         {
                             if (await sftp.DeleteFolder(path))
@@ -183,19 +185,13 @@ namespace Upload.Services
             try
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
-                return await sftpWorkerPool.Enqueue(new SftpJob()
+                if (await CreateAppModel(location))
                 {
-                    Execute = async (sftp) =>
-                    {
-                        if (await CreateAppModel(location))
-                        {
-                            Util.ShowCreatedMessager("Program", location.AppName);
-                            return true;
-                        }
-                        Util.ShowCreateFailedMessager("Program", location.AppName);
-                        return false;
-                    }
-                }).WaitAsync<bool>();
+                    Util.ShowCreatedMessager("Program", location.AppName);
+                    return true;
+                }
+                Util.ShowCreateFailedMessager("Program", location.AppName);
+                return false;
             }
             finally
             {
@@ -216,7 +212,10 @@ namespace Upload.Services
                 {
                     return false;
                 }
-                var (model, remoteAppListPath) = await ModelUtil.GetAppListModel(loca, zipPassword);
+                var (model, remoteAppListPath) = await sftpWorkerPool.Enqueue(new SftpJob()
+                {
+                    Execute = async (sftp) => await ModelUtil.GetAppListModel(sftp, loca, zipPassword)
+                }).WaitAsync<Tuple<AppList, string>>();
                 if (model == null)
                 {
                     model = new AppList();
@@ -269,7 +268,10 @@ namespace Upload.Services
                 {
                     return false;
                 }
-                var (model, remoteAppListPath) = await ModelUtil.GetAppListModel(loca, zipPassword);
+                var (model, remoteAppListPath) = await sftpWorkerPool.Enqueue(new SftpJob()
+                {
+                    Execute = async (sftp) => await ModelUtil.GetAppListModel(sftp, loca, zipPassword)
+                }).WaitAsync<Tuple<AppList, string>>();
                 if (model == null)
                 {
                     model = new AppList();
@@ -285,7 +287,11 @@ namespace Upload.Services
                     return false;
                 }
                 ////////////// copy model //////////////////////////////
-                var sourceAppModel = await ModelUtil.GetModelConfig<AppModel>(sourcePathModel.AppPath, zipPassword);
+                ///
+                var sourceAppModel = await sftpWorkerPool.Enqueue(new SftpJob()
+                {
+                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AppModel>(sftp, sourcePathModel.AppPath, zipPassword)
+                }).WaitAsync<AppModel>();
                 if (sourceAppModel == null)
                 {
                     Util.ShowMessager($"Get soruce App model failed!");
@@ -306,7 +312,10 @@ namespace Upload.Services
                 //////////////////////////////////////////////////
                 ///
                 ///////// copy appAccessUserList //////////
-                var appAccessUserList = await ModelUtil.GetModelConfig<AccessUserListModel>(sourcePathModel.AccectUserPath, zipPassword);
+                var appAccessUserList = await sftpWorkerPool.Enqueue(new SftpJob()
+                {
+                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AccessUserListModel>(sftp, sourcePathModel.AccectUserPath, zipPassword)
+                }).WaitAsync<AccessUserListModel>();
                 string programAccessUserPath = PathUtil.GetAppAccessUserPath(newLocation);
                 if (!await ModelUtil.UploadModel(appAccessUserList, programAccessUserPath, zipPassword))
                 {
@@ -340,15 +349,15 @@ namespace Upload.Services
                 {
                     Execute = async (sftp) =>
                     {
-                        var (appList, remoteAppListPath) = await ModelUtil.GetAppListModel(loca, zipPassword);
+                        var (appList, remoteAppListPath) = await ModelUtil.GetAppListModel(sftp, loca, zipPassword);
                         if (appList?.ProgramPaths != null)
                         {
                             if (appList.ProgramPaths.TryGetValue(loca.AppName, out var modelPath))
                             {
-                                AppModel appModel = await ModelUtil.GetModelConfig<AppModel>(modelPath.AppPath, zipPassword);
+                                AppModel appModel = await ModelUtil.GetModelConfig<AppModel>(sftp, modelPath.AppPath, zipPassword);
                                 if (appModel?.FileModels != null)
                                 {
-                                    HashSet<FileModel> canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(appModel.FileModels.ToList(), appList, zipPassword, modelPath.AppPath);
+                                    HashSet<FileModel> canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(sftp, appModel.FileModels.ToList(), appList, zipPassword, modelPath.AppPath);
                                     await ModelUtil.RemoveRemoteFile(canDeletes);
                                     await sftp.DeleteFile(modelPath.AppPath);
                                 }

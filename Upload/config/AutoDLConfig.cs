@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Upload.Config
 {
-    public class AutoDLConfig
+    public sealed class AutoDLConfig
     {
         private static readonly Lazy<AutoDLConfig> _instance = new Lazy<AutoDLConfig>(() => new AutoDLConfig());
         private static readonly string cfPath = "./config.json";
@@ -14,8 +14,8 @@ namespace Upload.Config
             if (!Init(cfPath))
             {
                 _configModel = new ConfigModel();
+                UpdateCf();
             }
-            UpdateCf();
         }
 
         private bool Init(string cfPath)

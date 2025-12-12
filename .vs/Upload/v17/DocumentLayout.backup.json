@@ -3,42 +3,36 @@
   "WorkspaceRootPath": "D:\\2.C#\\Upload\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\config\\autodlconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\config\\autodlconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\services\\worker\\implement\\workerpooliplm\\sftpworkerpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\worker\\implement\\workerpooliplm\\sftpworkerpool.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\config\\sftpconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\config\\sftpconfig.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\services\\process\\fileprocess\\fileprocesssevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\process\\fileprocess\\fileprocesssevice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\common\\ziphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\common\\ziphelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\services\\locationmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\locationmanagement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\services\\locationcreater.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\locationcreater.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Upload||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\Upload\\upload\\common\\modelutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\common\\modelutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\common\\modelutil.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\Upload\\upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\uploader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\Upload\\upload\\modelview\\mytreefolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\modelview\\mytreefolder.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\Upload\\upload\\services\\mytreeactional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\mytreeactional.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|D:\\2.C#\\Upload\\upload\\services\\worker\\implement\\workeriplm\\baseworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\services\\worker\\implement\\workeriplm\\baseworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+      "AbsoluteMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|d:\\2.c#\\upload\\upload\\gui\\accessusercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{9971CCDF-E9E2-4DAA-B149-5E7E7FFE6D81}|Upload\\Upload.csproj|solutionrelative:upload\\gui\\accessusercontrol.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -57,113 +51,106 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "FileProcessSevice.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
-              "RelativeDocumentMoniker": "Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
-              "RelativeToolTip": "Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
-              "ViewState": "AgIAAI4AAAAAAAAAAAAtwKwAAAARAAAAAAAAAA==",
+              "Title": "AutoDLConfig.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Config\\AutoDLConfig.cs",
+              "RelativeDocumentMoniker": "Upload\\Config\\AutoDLConfig.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Config\\AutoDLConfig.cs",
+              "RelativeToolTip": "Upload\\Config\\AutoDLConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T10:28:11.922Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ZipHelper.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\common\\ZipHelper.cs",
-              "RelativeDocumentMoniker": "Upload\\common\\ZipHelper.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\common\\ZipHelper.cs",
-              "RelativeToolTip": "Upload\\common\\ZipHelper.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T10:02:34.581Z",
+              "WhenOpened": "2025-12-12T06:41:10.229Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Upload",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Upload.csproj",
-              "RelativeDocumentMoniker": "Upload\\Upload.csproj",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Upload.csproj",
-              "RelativeToolTip": "Upload\\Upload.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2025-12-11T09:23:42.835Z",
+              "Title": "SftpConfig.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\config\\SftpConfig.cs",
+              "RelativeDocumentMoniker": "Upload\\config\\SftpConfig.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\config\\SftpConfig.cs",
+              "RelativeToolTip": "Upload\\config\\SftpConfig.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T06:30:55.618Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "LocationCreater.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\LocationCreater.cs",
-              "RelativeDocumentMoniker": "Upload\\Services\\LocationCreater.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\LocationCreater.cs",
-              "RelativeToolTip": "Upload\\Services\\LocationCreater.cs",
-              "ViewState": "AgIAAEgBAAAAAAAAAAAywGkBAAAdAAAAAAAAAA==",
+              "Title": "SftpWorkerPool.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\Worker\\Implement\\WorkerPoolIplm\\SftpWorkerPool.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\Worker\\Implement\\WorkerPoolIplm\\SftpWorkerPool.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\Worker\\Implement\\WorkerPoolIplm\\SftpWorkerPool.cs",
+              "RelativeToolTip": "Upload\\Services\\Worker\\Implement\\WorkerPoolIplm\\SftpWorkerPool.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:41:45.094Z",
+              "WhenOpened": "2025-12-12T06:29:41.357Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "ModelUtil.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\common\\ModelUtil.cs",
-              "RelativeDocumentMoniker": "Upload\\common\\ModelUtil.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\common\\ModelUtil.cs",
-              "RelativeToolTip": "Upload\\common\\ModelUtil.cs",
-              "ViewState": "AgIAAGgAAAAAAAAAAADwv3kAAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:21:10.21Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Uploader.cs",
               "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\Uploader.cs",
               "RelativeDocumentMoniker": "Upload\\Services\\Uploader.cs",
               "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\Uploader.cs",
               "RelativeToolTip": "Upload\\Services\\Uploader.cs",
-              "ViewState": "AgIAADgAAAAAAAAAAAAuwFMAAABAAAAAAAAAAA==",
+              "ViewState": "AgIAADIAAAAAAAAAAAAjwEUAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:20:45.623Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "MyTreeFolder.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\ModelView\\MyTreeFolder.cs",
-              "RelativeDocumentMoniker": "Upload\\ModelView\\MyTreeFolder.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\ModelView\\MyTreeFolder.cs",
-              "RelativeToolTip": "Upload\\ModelView\\MyTreeFolder.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAWwB4AAAAxAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:19:26.254Z"
+              "WhenOpened": "2025-12-12T06:19:02.536Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "MyTreeActional.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\MyTreeActional.cs",
-              "RelativeDocumentMoniker": "Upload\\Services\\MyTreeActional.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\MyTreeActional.cs",
-              "RelativeToolTip": "Upload\\Services\\MyTreeActional.cs",
-              "ViewState": "AgIAAJIBAAAAAAAAAADwv60BAAArAAAAAAAAAA==",
+              "Title": "AccessUserControl.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\gui\\AccessUserControl.cs",
+              "RelativeDocumentMoniker": "Upload\\gui\\AccessUserControl.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\gui\\AccessUserControl.cs",
+              "RelativeToolTip": "Upload\\gui\\AccessUserControl.cs",
+              "ViewState": "AgIAACMAAAAAAAAAAADgvzoAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:18:24.892Z"
+              "WhenOpened": "2025-12-12T06:17:29.339Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "BaseWorker.cs",
-              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
-              "RelativeDocumentMoniker": "Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
-              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
-              "RelativeToolTip": "Upload\\Services\\Worker\\Implement\\WorkerIplm\\BaseWorker.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "ModelUtil.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\common\\ModelUtil.cs",
+              "RelativeDocumentMoniker": "Upload\\common\\ModelUtil.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\common\\ModelUtil.cs",
+              "RelativeToolTip": "Upload\\common\\ModelUtil.cs",
+              "ViewState": "AgIAAHUAAAAAAAAAAAAswIkAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-12-11T08:14:55.789Z"
+              "WhenOpened": "2025-12-12T04:28:15.089Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "LocationManagement.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\LocationManagement.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\LocationManagement.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\LocationManagement.cs",
+              "RelativeToolTip": "Upload\\Services\\LocationManagement.cs",
+              "ViewState": "AgIAAMsAAAAAAAAAAAAUwOUAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T03:25:22.86Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "FileProcessSevice.cs",
+              "DocumentMoniker": "D:\\2.C#\\Upload\\Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
+              "RelativeDocumentMoniker": "Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
+              "ToolTip": "D:\\2.C#\\Upload\\Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
+              "RelativeToolTip": "Upload\\Services\\Process\\FileProcess\\FileProcessSevice.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAQwBgAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-12-12T01:49:36.887Z",
+              "EditorCaption": ""
             }
           ]
         }

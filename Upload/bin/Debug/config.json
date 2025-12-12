@@ -1,6 +1,9 @@
 {
   "TempDir": "./temp",
   "SftpConfig": {
+    "MinWorker": 1,
+    "MaxWorker": 10,
+    "QueueCapacity": 100,
     "Host": "127.0.0.1",
     "Port": 4422,
     "User": "oper",

@@ -227,7 +227,10 @@ namespace Upload.Services
             try
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
-                _appList = (await ModelUtil.GetAppListModel(Location, zipPassword)).Item1;
+                _appList = (await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                {
+                    Execute = async (sftp) => await ModelUtil.GetAppListModel(sftp, Location, zipPassword)
+                }).WaitAsync<(AppList appList, string path)>()).appList;
                 List<string> list = new List<string>();
                 if (_appList != null)
                 {

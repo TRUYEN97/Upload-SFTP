@@ -14,7 +14,7 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private readonly int _maxWorkers;
         private readonly int _minWorkers;
-        private readonly object _lockObj = new object();
+        private readonly System.Timers.Timer timer;
         protected BaseWorkerPool(int minWorkers, int maxWorkers, IJobQueue<T> queue)
         {
             ThreadPool.GetMinThreads(out int wk, out int completionPortThreads);
@@ -23,7 +23,20 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
             _workers = new List<(IWorker, CancellationTokenSource)>();
             _minWorkers = minWorkers < 0 ? 0 : minWorkers;
             _maxWorkers = maxWorkers < minWorkers ? minWorkers : maxWorkers;
-            Task.Run(() => AutoScalerLoop());
+            timer = new System.Timers.Timer() { AutoReset = true, Interval = 1000 };
+            timer.Elapsed += (s, e) =>
+            {
+                timer.Stop();
+                try
+                {
+                    AutoScalerLoop();
+                }
+                finally
+                {
+                    timer.Start();
+                }
+            };
+            timer.Start();
         }
         protected abstract IWorker CreateNewWorker(IJobQueue<T> queue);
 
@@ -34,58 +47,49 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
 
         private void AddWorker()
         {
-            lock (_lockObj)
-            {
-                if (_workers.Count >= _maxWorkers)
-                    return;
-                var cancelToken = new CancellationTokenSource();
-                var worker = CreateNewWorker(_queue);
-                if (worker == null) return;
-                _ = Task.Run(async () => await worker.WorkerLoop(cancelToken.Token));
-                _workers.Add((worker, cancelToken));
-            }
+            if (_workers.Count >= _maxWorkers)
+                return;
+            var cancelToken = new CancellationTokenSource();
+            var worker = CreateNewWorker(_queue);
+            if (worker == null) return;
+            Task.Run(async () => await worker.WorkerLoop(cancelToken.Token));
+            _workers.Add((worker, cancelToken));
         }
 
         private void RemoveWorker()
         {
-            lock (_lockObj)
+            int count = _workers.Count;
+            if (count >= _minWorkers && count > 0)
             {
-                int count = _workers.Count;
-                if (count >= _minWorkers && count > 0)
+                try
                 {
-                    try
-                    {
-                        var (worker, cts) = _workers[count - 1];
-                        cts?.Cancel();
-                        worker?.Dispose();
-                    }
-                    catch { }
-                    _workers.RemoveAt(count - 1);
+                    var (worker, cts) = _workers[count - 1];
+                    cts?.Cancel();
+                    worker?.Dispose();
                 }
+                catch { }
+                _workers.RemoveAt(count - 1);
             }
         }
 
-        private async Task AutoScalerLoop()
+        private void AutoScalerLoop()
         {
-            while (!_cts.IsCancellationRequested)
+            int queueCount = _queue.Count;
+            int workerCount = _workers.Count;
+            if (queueCount > workerCount * 5 || (queueCount > 0 && workerCount == 0))
             {
-                int queueCount = _queue.Count;
-                int workerCount = _workers.Count;
-                if (queueCount > workerCount * 5 || (queueCount > 0 && workerCount == 0))
-                {
-                    AddWorker();
-                }
-                else
-                if (queueCount < workerCount * 2 && (workerCount > 1 || queueCount == 0))
-                {
-                    RemoveWorker();
-                }
-                await Task.Delay(2000);
+                AddWorker();
+            }
+            else
+            if (queueCount < workerCount * 2 && (workerCount > 1 || queueCount == 0))
+            {
+                RemoveWorker();
             }
         }
 
         public void Dispose()
         {
+            timer.Dispose();
             _queue.Dispose();
             _cts.Cancel();
             foreach (var worker in _workers)

@@ -1,10 +1,12 @@
-﻿using System;
+﻿using AutoDownload.Gui;
+using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using AutoDownload.Gui;
 using Upload.Common;
 using Upload.Model;
 using Upload.ModelView;
+using Upload.Services.Worker.Implement.JobIplm;
+using Upload.Services.Worker.Implement.WorkerPoolIplm;
 using static Upload.Services.LockManager;
 
 namespace Upload.gui
@@ -49,11 +51,15 @@ namespace Upload.gui
                 return;
             }
             this.remotePath = remotePath;
-            Task.Run(async () => {
+            Task.Run(async () =>
+            {
                 try
                 {
                     ForceLockAll(Reasons.LOCK_ACCESS_USER_UPDATE);
-                    AccessUserListModel userModels = await ModelUtil.GetModelConfig<AccessUserListModel>(remotePath, zipPassword);
+                    var userModels = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                    {
+                        Execute = async (sftp) => await ModelUtil.GetModelConfig<AccessUserListModel>(sftp, remotePath, zipPassword)
+                    }).WaitAsync<AccessUserListModel>();
                     if (userModels == null)
                     {
                         Clear();
@@ -66,7 +72,7 @@ namespace Upload.gui
                     ForceUnlockAll(Reasons.LOCK_ACCESS_USER_UPDATE);
                 }
             });
-            
+
         }
 
         private void btUserUpdate_Click(object sender, EventArgs e)
