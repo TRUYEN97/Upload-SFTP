@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Upload.Common;
 using Upload.Model;
+using Upload.Services.Process;
 using Upload.Services.Worker.Implement.JobIplm;
 using Upload.Services.Worker.Implement.WorkerPoolIplm;
+using WinSCP;
 
 namespace Upload.Services
 {
@@ -121,7 +123,7 @@ namespace Upload.Services
                             Util.ShowCreateFailedMessager("station", location.Station);
                             return false;
                         }
-                        await ModelUtil.UploadModel(new AccessUserListModel(), PathUtil.GetStationAccessUserPath(location), zipPassword);
+                        await ModelUtil.UploadModel(sftp, new AccessUserListModel(), PathUtil.GetStationAccessUserPath(location), zipPassword);
                         Util.ShowCreatedMessager("Station", location.Station);
                         return true;
                     }
@@ -204,50 +206,52 @@ namespace Upload.Services
             try
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
-
-                Location loca = new Location(location);
-                if (string.IsNullOrWhiteSpace(loca.Product)
-                    || string.IsNullOrWhiteSpace(loca.Station)
-                    || string.IsNullOrWhiteSpace(loca.AppName))
+                return await sftpWorkerPool.Enqueue(new SftpJob()
                 {
-                    return false;
-                }
-                var (model, remoteAppListPath) = await sftpWorkerPool.Enqueue(new SftpJob()
-                {
-                    Execute = async (sftp) => await ModelUtil.GetAppListModel(sftp, loca, zipPassword)
-                }).WaitAsync<Tuple<AppList, string>>();
-                if (model == null)
-                {
-                    model = new AppList();
-                }
-                if (model.ProgramPaths.ContainsKey(loca.AppName))
-                {
-                    return true;
-                }
-                string programDataPath = PathUtil.GetAppModelPath(loca);
-                if (!await ModelUtil.UploadModel(new AppModel()
-                {
-                    RemoteStoreDir = PathUtil.GetCommonPath(loca),
-                    RemoteAppListPath = remoteAppListPath,
-                    Path = programDataPath,
-                    Version = $"{DateTime.Now:\\Vyyyy\\.MM\\.dd}"
-                }, programDataPath, zipPassword))
-                {
-                    Util.ShowMessager($"Station [{loca.Station}] create [{loca.AppName}] app data failed!");
-                    return false;
-                }
-                string programAccessUserPath = PathUtil.GetAppAccessUserPath(loca);
-                if (!await ModelUtil.UploadModel(new AccessUserListModel(), programAccessUserPath, zipPassword))
-                {
-                    Util.ShowMessager($"Station [{loca.Station}] create access user for [{loca.AppName}] failed!");
-                    return false;
-                }
-                model.ProgramPaths.Add(loca.AppName, new ProgramPathModel()
-                {
-                    AccectUserPath = programAccessUserPath,
-                    AppPath = programDataPath
-                });
-                return (await ModelUtil.UpLoadAppListModel(model, loca, zipPassword)).Item1;
+                    Execute = async (sftp) =>
+                    {
+                        Location loca = new Location(location);
+                        if (string.IsNullOrWhiteSpace(loca.Product)
+                            || string.IsNullOrWhiteSpace(loca.Station)
+                            || string.IsNullOrWhiteSpace(loca.AppName))
+                        {
+                            return false;
+                        }
+                        var (model, remoteAppListPath) = await ModelUtil.GetAppListModel(sftp, loca, zipPassword);
+                        if (model == null)
+                        {
+                            model = new AppList();
+                        }
+                        if (model.ProgramPaths.ContainsKey(loca.AppName))
+                        {
+                            return true;
+                        }
+                        string programDataPath = PathUtil.GetAppModelPath(loca);
+                        if (!await ModelUtil.UploadModel(sftp, new AppModel()
+                        {
+                            RemoteStoreDir = PathUtil.GetCommonPath(loca),
+                            RemoteAppListPath = remoteAppListPath,
+                            Path = programDataPath,
+                            Version = $"{DateTime.Now:\\Vyyyy\\.MM\\.dd}"
+                        }, programDataPath, zipPassword))
+                        {
+                            Util.ShowMessager($"Station [{loca.Station}] create [{loca.AppName}] app data failed!");
+                            return false;
+                        }
+                        string programAccessUserPath = PathUtil.GetAppAccessUserPath(loca);
+                        if (!await ModelUtil.UploadModel(sftp, new AccessUserListModel(), programAccessUserPath, zipPassword))
+                        {
+                            Util.ShowMessager($"Station [{loca.Station}] create access user for [{loca.AppName}] failed!");
+                            return false;
+                        }
+                        model.ProgramPaths.Add(loca.AppName, new ProgramPathModel()
+                        {
+                            AccectUserPath = programAccessUserPath,
+                            AppPath = programDataPath
+                        });
+                        return (await ModelUtil.UpLoadAppListModel(sftp, model, loca, zipPassword)).Item1;
+                    }
+                }).WaitAsync<bool>();
             }
             finally
             {
@@ -259,76 +263,72 @@ namespace Upload.Services
             try
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
-
-                Location loca = new Location(location);
-                if (string.IsNullOrWhiteSpace(loca.Product)
-                    || string.IsNullOrWhiteSpace(loca.Station)
-                    || string.IsNullOrWhiteSpace(newName)
-                    || string.IsNullOrWhiteSpace(loca.AppName))
+                return await sftpWorkerPool.Enqueue(new SftpJob()
                 {
-                    return false;
-                }
-                var (model, remoteAppListPath) = await sftpWorkerPool.Enqueue(new SftpJob()
-                {
-                    Execute = async (sftp) => await ModelUtil.GetAppListModel(sftp, loca, zipPassword)
-                }).WaitAsync<Tuple<AppList, string>>();
-                if (model == null)
-                {
-                    model = new AppList();
-                }
-                if (model.ProgramPaths.ContainsKey(newName))
-                {
-                    Util.ShowMessager($"Program [{newName}] has exists!");
-                    return false;
-                }
-                if (!model.ProgramPaths.TryGetValue(loca.AppName, out var sourcePathModel))
-                {
-                    Util.ShowMessager("Get soruce path model failed!");
-                    return false;
-                }
-                ////////////// copy model //////////////////////////////
-                ///
-                var sourceAppModel = await sftpWorkerPool.Enqueue(new SftpJob()
-                {
-                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AppModel>(sftp, sourcePathModel.AppPath, zipPassword)
-                }).WaitAsync<AppModel>();
-                if (sourceAppModel == null)
-                {
-                    Util.ShowMessager($"Get soruce App model failed!");
-                    return false;
-                }
-                var newLocation = new Location(loca) { AppName = newName };
-                string programDataPath = PathUtil.GetAppModelPath(newLocation);
-                sourceAppModel.Path = programDataPath;
-                sourceAppModel.RemoteStoreDir = PathUtil.GetCommonPath(newLocation);
-                sourceAppModel.RemoteAppListPath = remoteAppListPath;
-                sourceAppModel.Enable = false;
-                sourceAppModel.Version = $"{DateTime.Now:\\Vyyyy\\.MM\\.dd}";
-                if (!await ModelUtil.UploadModel(sourceAppModel, programDataPath, zipPassword))
-                {
-                    Util.ShowMessager($"Station [{newLocation.Station}] create [{newName}] app data failed!");
-                    return false;
-                }
-                //////////////////////////////////////////////////
-                ///
-                ///////// copy appAccessUserList //////////
-                var appAccessUserList = await sftpWorkerPool.Enqueue(new SftpJob()
-                {
-                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AccessUserListModel>(sftp, sourcePathModel.AccectUserPath, zipPassword)
-                }).WaitAsync<AccessUserListModel>();
-                string programAccessUserPath = PathUtil.GetAppAccessUserPath(newLocation);
-                if (!await ModelUtil.UploadModel(appAccessUserList, programAccessUserPath, zipPassword))
-                {
-                    Util.ShowMessager($"Station [{newLocation.Station}] create access user for [{newName}] failed!");
-                    return false;
-                }
-                ////////////////////////////////////////
-                model.ProgramPaths.Add(newLocation.AppName, new ProgramPathModel()
-                {
-                    AccectUserPath = programAccessUserPath,
-                    AppPath = programDataPath
-                });
-                return (await ModelUtil.UpLoadAppListModel(model, newLocation, zipPassword)).Item1;
+                    Execute = async (sftp) =>
+                    {
+                        Location loca = new Location(location);
+                        if (string.IsNullOrWhiteSpace(loca.Product)
+                            || string.IsNullOrWhiteSpace(loca.Station)
+                            || string.IsNullOrWhiteSpace(newName)
+                            || string.IsNullOrWhiteSpace(loca.AppName))
+                        {
+                            return false;
+                        }
+                        var (model, remoteAppListPath) = await ModelUtil.GetAppListModel(sftp, loca, zipPassword);
+                        if (model == null)
+                        {
+                            model = new AppList();
+                        }
+                        if (model.ProgramPaths.ContainsKey(newName))
+                        {
+                            Util.ShowMessager($"Program [{newName}] has exists!");
+                            return false;
+                        }
+                        if (!model.ProgramPaths.TryGetValue(loca.AppName, out var sourcePathModel))
+                        {
+                            Util.ShowMessager("Get soruce path model failed!");
+                            return false;
+                        }
+                        ////////////// copy model //////////////////////////////
+                        ///
+                        var sourceAppModel = await ModelUtil.GetModelConfig<AppModel>(sftp, sourcePathModel.AppPath, zipPassword);
+                        if (sourceAppModel == null)
+                        {
+                            Util.ShowMessager($"Get soruce App model failed!");
+                            return false;
+                        }
+                        var newLocation = new Location(loca) { AppName = newName };
+                        string programDataPath = PathUtil.GetAppModelPath(newLocation);
+                        sourceAppModel.Path = programDataPath;
+                        sourceAppModel.RemoteStoreDir = PathUtil.GetCommonPath(newLocation);
+                        sourceAppModel.RemoteAppListPath = remoteAppListPath;
+                        sourceAppModel.Enable = false;
+                        sourceAppModel.Version = $"{DateTime.Now:\\Vyyyy\\.MM\\.dd}";
+                        if (!await ModelUtil.UploadModel(sftp, sourceAppModel, programDataPath, zipPassword))
+                        {
+                            Util.ShowMessager($"Station [{newLocation.Station}] create [{newName}] app data failed!");
+                            return false;
+                        }
+                        //////////////////////////////////////////////////
+                        ///
+                        ///////// copy appAccessUserList //////////
+                        var appAccessUserList = await ModelUtil.GetModelConfig<AccessUserListModel>(sftp, sourcePathModel.AccectUserPath, zipPassword);
+                        string programAccessUserPath = PathUtil.GetAppAccessUserPath(newLocation);
+                        if (!await ModelUtil.UploadModel(sftp, appAccessUserList, programAccessUserPath, zipPassword))
+                        {
+                            Util.ShowMessager($"Station [{newLocation.Station}] create access user for [{newName}] failed!");
+                            return false;
+                        }
+                        ////////////////////////////////////////
+                        model.ProgramPaths.Add(newLocation.AppName, new ProgramPathModel()
+                        {
+                            AccectUserPath = programAccessUserPath,
+                            AppPath = programDataPath
+                        });
+                        return (await ModelUtil.UpLoadAppListModel(sftp, model, newLocation, zipPassword)).Item1;
+                    }
+                }).WaitAsync<bool>();
             }
             finally
             {
@@ -345,7 +345,8 @@ namespace Upload.Services
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
                 Location loca = new Location(location);
-                return await sftpWorkerPool.Enqueue(new SftpJob()
+                List<FileModel> canDeletes = null;
+                bool seccuess = await sftpWorkerPool.Enqueue(new SftpJob()
                 {
                     Execute = async (sftp) =>
                     {
@@ -357,13 +358,12 @@ namespace Upload.Services
                                 AppModel appModel = await ModelUtil.GetModelConfig<AppModel>(sftp, modelPath.AppPath, zipPassword);
                                 if (appModel?.FileModels != null)
                                 {
-                                    HashSet<FileModel> canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(sftp, appModel.FileModels.ToList(), appList, zipPassword, modelPath.AppPath);
-                                    await ModelUtil.RemoveRemoteFile(canDeletes);
+                                    canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(sftp, appModel.FileModels.ToList(), appList, zipPassword, modelPath.AppPath);
                                     await sftp.DeleteFile(modelPath.AppPath);
                                 }
                                 await sftp.DeleteFile(modelPath.AccectUserPath);
                                 appList.ProgramPaths.Remove(loca.AppName);
-                                if (!await ModelUtil.UploadModel(appList, remoteAppListPath, zipPassword))
+                                if (!await ModelUtil.UploadModel(sftp, appList, remoteAppListPath, zipPassword))
                                 {
                                     Util.ShowDeleteFailedMessager(location.AppName, "");
                                     return false;
@@ -374,6 +374,12 @@ namespace Upload.Services
                         return true;
                     }
                 }).WaitAsync<bool>();
+                if (seccuess)
+                {
+                    await FileProcessSevice.Instance.DeleteFilesAsync(canDeletes);
+                    return true;
+                }
+                return false;
             }
             finally
             {

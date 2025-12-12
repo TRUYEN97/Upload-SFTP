@@ -78,13 +78,13 @@ namespace Upload.Common
             }
         }
 
-        internal static async Task<(bool, string)> UpLoadAppListModel(AppList appList, Location location, string zipPassword)
+        internal static async Task<(bool, string)> UpLoadAppListModel(ISftpClient sftp, AppList appList, Location location, string zipPassword)
         {
             string appConfigRemotePath = PathUtil.GetAppConfigRemotePath(location);
-            return (await UploadModel(appList, appConfigRemotePath, zipPassword), appConfigRemotePath);
+            return (await UploadModel(sftp, appList, appConfigRemotePath, zipPassword), appConfigRemotePath);
         }
 
-        public static async Task<bool> UploadModel(object model, string remotePath, string zipPassword)
+        public static async Task<bool> UploadModel(ISftpClient sftp, object model, string remotePath, string zipPassword)
         {
             try
             {
@@ -93,40 +93,20 @@ namespace Upload.Common
                 {
                     return false;
                 }
-                return await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                string json = JsonConvert.SerializeObject(model, Formatting.Indented);
+                using (var zipStream = await ZipHelper.JsonAsZipToStream(json, Path.GetFileNameWithoutExtension(remotePath), zipPassword))
                 {
-                    Execute = async (sftp) =>
+                    if (!await sftp.CreateDirectory(Path.GetDirectoryName(remotePath)))
                     {
-                        string json = JsonConvert.SerializeObject(model, Formatting.Indented);
-                        using (var zipStream = await ZipHelper.JsonAsZipToStream(json, Path.GetFileNameWithoutExtension(remotePath), zipPassword))
-                        {
-                            if (!await sftp.CreateDirectory(Path.GetDirectoryName(remotePath)))
-                            {
-                                return false;
-                            }
-                            return await sftp.UploadStreamFileAsync(zipStream, remotePath);
-                        }
+                        return false;
                     }
-                }).WaitAsync<bool>();
+                    return await sftp.UploadStreamFileAsync(zipStream, remotePath);
+                }
             }
             finally
             {
                 CursorUtil.SetCursorIs(Cursors.Default);
             }
-        }
-
-        public static async Task RemoveRemoteFile(ICollection<FileModel> removeFileModel)
-        {
-            try
-            {
-                CursorUtil.SetCursorIs(Cursors.WaitCursor);
-                await FileProcessSevice.Instance.DeleteFilesAsync(removeFileModel);
-            }
-            finally
-            {
-                CursorUtil.SetCursorIs(Cursors.Default);
-            }
-
         }
 
         internal static async Task<(AppList, string)> GetAppListModel(ISftpClient sftp, Location location, string zipPassword)
@@ -135,7 +115,7 @@ namespace Upload.Common
             return (await GetModelConfig<AppList>(sftp, appConfigRemotePath, zipPassword), appConfigRemotePath);
         }
 
-        internal static async Task<HashSet<FileModel>> GetCanDeleteFileModelsAsync(ISftpClient sftp, List<FileModel> fileModels,
+        internal static async Task<List<FileModel>> GetCanDeleteFileModelsAsync(ISftpClient sftp, List<FileModel> fileModels,
             AppList appList, string zipPassword, string thisAppPath = null)
         {
             Dictionary<string, HashSet<FileModel>> canDeleteFileGroups = fileModels.GroupBy(f => f.Md5).ToDictionary(g => g.Key, g => new HashSet<FileModel>(g.Select(f => f)));
@@ -152,7 +132,7 @@ namespace Upload.Common
                 canDeleteFileGroups = canDeleteFileGroups.Where(f => !md5FileGroups.ContainsKey(f.Key)).ToDictionary(f => f.Key, f => f.Value);
                 if (canDeleteFileGroups.Count == 0) break;
             }
-            return canDeleteFileGroups.Values.SelectMany(set => set).Distinct().ToHashSet();
+            return canDeleteFileGroups.Values.SelectMany(set => set).Distinct().ToList();
         }
     }
 }

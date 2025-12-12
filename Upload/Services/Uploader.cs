@@ -1,5 +1,6 @@
 ﻿using AutoDownload.Gui;
 using System;
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -79,23 +80,30 @@ namespace Upload.Services
                         {
                             appModel.FileModels = Util.FilterFileModelClass(appModel.FileModels);
                             //////////////////////////////
-                            if (await ModelUtil.UploadModel(appModel, appModel.Path, zipPassword))
+                            List<FileModel> canDeletes = null;
+                            bool success = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
                             {
-                                var appList = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
+                                Execute = async (sftp) =>
                                 {
-                                    Execute = async (sftp) => await ModelUtil.GetModelConfig<AppList>(sftp, appModel.RemoteAppListPath, zipPassword)
-                                }).WaitAsync<AppList>();
-                                var canDeletes = await SftpWorkerPool.Instance.Enqueue(new SftpJob()
-                                {
-                                    Execute = async (sftp) => await ModelUtil.GetCanDeleteFileModelsAsync(sftp, showerModel.RemoveFileModel, appList, zipPassword)
-                                }).WaitAsync<HashSet<FileModel>>();
-                                await ModelUtil.RemoveRemoteFile(canDeletes);
-                                await locationManagement.UpdateProgramListItems(locationManagement?.Location?.AppName);
-                                LoggerBox.Addlog("update done");
+                                    if (await ModelUtil.UploadModel(sftp, appModel, appModel.Path, zipPassword))
+                                    {
+                                        var appList = await ModelUtil.GetModelConfig<AppList>(sftp, appModel.RemoteAppListPath, zipPassword);
+                                        canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(sftp, showerModel.RemoveFileModel, appList, zipPassword);
+                                        await locationManagement.UpdateProgramListItems(locationManagement?.Location?.AppName);
+                                        return true;
+                                    }
+                                    return false;
+                                }
+                            }).WaitAsync<bool>();
+                            if (success)
+                            {
+                                await fileProcess.DeleteFilesAsync(canDeletes);
+                                LoggerBox.Addlog("Update done");
+                                LoggerBox.Addlog("Update done");
                                 return;
                             }
                         }
-                        LoggerBox.Addlog("Update failded");
+                        LoggerBox.Addlog("Update failded!!");
                         MessageBox.Show("Update failded!!");
                     }
                     catch (Exception ex)

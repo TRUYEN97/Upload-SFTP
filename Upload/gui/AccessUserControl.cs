@@ -97,15 +97,22 @@ namespace Upload.gui
                 {
                     ForceLockAll(Reasons.LOCK_ACCESS_USER_UPDATE);
                     AccessUserListModel userModels = _userListViewModelView.AccessUserListModel ?? new AccessUserListModel();
-                    if (!await ModelUtil.UploadModel(userModels, remotePath, zipPassword))
+                    await SftpWorkerPool.Instance.Enqueue(new SftpJob()
                     {
-                        LoggerBox.Addlog("Upload Access user list failed!");
-                    }
-                    else
-                    {
-                        LoggerBox.Addlog("Upload Access user list");
-                        _userListViewModelView.HasChanged = false;
-                    }
+                        Execute = async (sftp) =>
+                        {
+                            if (!await ModelUtil.UploadModel(sftp, userModels, remotePath, zipPassword))
+                            {
+                                LoggerBox.Addlog("Upload Access user list failed!");
+                            }
+                            else
+                            {
+                                LoggerBox.Addlog("Upload Access user list");
+                                _userListViewModelView.HasChanged = false;
+                            }
+                            return null;
+                        }
+                    }).WaitAsync<object>();
                 }
                 finally
                 {
