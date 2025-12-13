@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Upload.Common;
 using Upload.Model;
+using Upload.Services.Process;
 
 namespace Upload.Services
 {
@@ -15,7 +16,7 @@ namespace Upload.Services
             try
             {
                 string fullPath = Path.GetFullPath(localDir);
-                var storeF = await ModelUtil.Download(fileModel, fullPath, ConstKey.ZIP_PASSWORD);
+                var storeF = await DownloadFileModel(fileModel, fullPath);
                 if (storeF != null)
                 {
                     Util.OpenFile(storeF.StorePath);
@@ -28,8 +29,38 @@ namespace Upload.Services
         }
         internal static async Task<string> Download(FileModel fileModel, string localDir)
         {
-            string fullPath = Path.GetFullPath(localDir);
-            return (await ModelUtil.Download(fileModel, fullPath, ConstKey.ZIP_PASSWORD))?.StorePath;
+            return (await DownloadFileModel(fileModel, localDir))?.StorePath;
+        }
+
+        internal static async Task<StoreFileModel> DownloadFileModel(FileModel fileModel, string localDir)
+        {
+            try
+            {
+                CursorUtil.SetCursorIs(Cursors.WaitCursor);
+
+                if (fileModel == null)
+                {
+                    return null;
+                }
+                string storePath = Path.Combine(localDir, fileModel.ProgramPath);
+                StoreFileModel storeFileModel = new StoreFileModel(fileModel)
+                {
+                    StorePath = storePath
+                };
+                if (File.Exists(storePath) && Util.GetMD5HashFromFile(storePath).Equals(fileModel.Md5))
+                {
+                    return storeFileModel;
+                }
+                if (await FileProcessSevice.DownloadFileAsync(fileModel, localDir, ConstKey.ZIP_PASSWORD))
+                {
+                    return storeFileModel;
+                }
+                return null;
+            }
+            finally
+            {
+                CursorUtil.SetCursorIs(Cursors.Default);
+            }
         }
     }
 }

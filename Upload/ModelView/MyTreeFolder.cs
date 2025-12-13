@@ -173,10 +173,7 @@ namespace Upload.ModelView
             TreeNode treeNode = treeView.SelectedNode;
             if (treeNode != null)
             {
-                Task.Run(async () =>
-                {
-                    await _myTreeActional.OpenFile(treeNode);
-                });
+                Task.Run(async () => await _myTreeActional.OpenFile(treeNode));
             }
         }
         protected void Edit()
@@ -184,10 +181,7 @@ namespace Upload.ModelView
             TreeNode treeNode = treeView.SelectedNode;
             if (treeNode != null)
             {
-                Task.Run(async () =>
-                {
-                    await _myTreeActional.EditFile(treeNode);
-                });
+                Task.Run(async () => await _myTreeActional.EditFile(treeNode));
             }
         }
 
@@ -364,10 +358,7 @@ namespace Upload.ModelView
 
         private void TreeView_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            Task.Run(async () =>
-            {
-                await _myTreeActional.OpenFile(e.Node);
-            });
+            Task.Run(async () => await _myTreeActional.OpenFile(e.Node));
         }
 
     }

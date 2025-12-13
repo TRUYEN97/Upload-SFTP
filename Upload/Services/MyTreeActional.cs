@@ -32,7 +32,6 @@ namespace Upload.Services
         private static readonly Font FOLDER_FONT = new Font("Microsoft Sans Serif", 10.0F, FontStyle.Regular, GraphicsUnit.Point, ((byte)(0)));
         private static readonly string FOLDER_KEY = "folder";
 
-        private readonly FileProcessSevice fileProcessSevice;
         private readonly TreeView _treeView;
         private readonly ImageList _imageList;
 
@@ -41,7 +40,6 @@ namespace Upload.Services
         public string RemoteDir { get; set; }
         public MyTreeActional(TreeView treeView)
         {
-            fileProcessSevice = FileProcessSevice.Instance;
             _treeView = treeView;
             _treeView.BackColor = TREE_BACK_COLOR;
             _treeView.LineColor = TREE_LINE_COLOR;
@@ -169,7 +167,7 @@ namespace Upload.Services
             {
                 CursorUtil.SetCursorIs(Cursors.WaitCursor);
                 Util.ShowMessager($"Download to folder: {folderPath}");
-                if (await fileProcessSevice.DownloadFilesAsync(fileModels, folderPath, ConstKey.ZIP_PASSWORD))
+                if (await FileProcessSevice.DownloadFilesAsync(fileModels, folderPath, ConstKey.ZIP_PASSWORD))
                 {
                     Util.ShowMessager($"Download to folder: {folderPath} OK");
                     MessageBox.Show($"Download to folder: {folderPath} OK");

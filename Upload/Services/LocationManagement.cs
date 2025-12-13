@@ -181,7 +181,7 @@ namespace Upload.Services
                 });
             };
 
-            this.formMain.BtDeleteProgram.Click += (s, e) =>
+            this.formMain.BtDeleteProgram.Click += async (s, e) =>
             {
                 if (string.IsNullOrWhiteSpace(Location.Product) || string.IsNullOrWhiteSpace(Location.Station) || string.IsNullOrWhiteSpace(Location.AppName)
                     || MessageBox.Show($"Do you want to delete [{Location.Product}/{Location.Station}/{Location.AppName}]?", "Warning", MessageBoxButtons.YesNo) != DialogResult.Yes
@@ -189,13 +189,10 @@ namespace Upload.Services
                 {
                     return;
                 }
-                Task.Run(async () =>
+                if (await _locatonCreater.DeleteProgram(Location))
                 {
-                    if (await _locatonCreater.DeleteProgram(Location))
-                    {
-                        await UpdateProgramListItems();
-                    }
-                });
+                    await UpdateProgramListItems();
+                }
             };
         }
 
@@ -239,6 +236,7 @@ namespace Upload.Services
                 UpdateCombobox(cbbProgram, list, selectName);
                 if (list.Count <= 0)
                 {
+                    Location.AppName = null;
                     ShowProgram(null);
                 }
             }

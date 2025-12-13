@@ -6,47 +6,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Upload.Model;
-using Upload.Services.Process;
 using Upload.Services.Sftp;
-using Upload.Services.Worker.Implement.JobIplm;
-using Upload.Services.Worker.Implement.WorkerPoolIplm;
-using WinSCP;
 
 namespace Upload.Common
 {
     internal static class ModelUtil
     {
-
-        public static async Task<StoreFileModel> Download(FileModel fileModel, string localDir, string zipPassword)
-        {
-            try
-            {
-                CursorUtil.SetCursorIs(Cursors.WaitCursor);
-
-                if (fileModel == null)
-                {
-                    return null;
-                }
-                string storePath = Path.Combine(localDir, fileModel.ProgramPath);
-                StoreFileModel storeFileModel = new StoreFileModel(fileModel)
-                {
-                    StorePath = storePath
-                };
-                if (File.Exists(storePath) && Util.GetMD5HashFromFile(storePath).Equals(fileModel.Md5))
-                {
-                    return storeFileModel;
-                }
-                if (await FileProcessSevice.Instance.DownloadFilesAsync(new FileModel[] { fileModel }, localDir, zipPassword))
-                {
-                    return storeFileModel;
-                }
-                return null;
-            }
-            finally
-            {
-                CursorUtil.SetCursorIs(Cursors.Default);
-            }
-        }
 
         public static async Task<T> GetModelConfig<T>(ISftpClient sftp, string remotePath, string zipPassword)
         {

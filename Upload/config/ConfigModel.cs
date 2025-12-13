@@ -9,14 +9,15 @@ namespace Upload.Config
         public ConfigModel()
         {
             // Thông tin cài đặt của chương trình
-            SftpConfig = new SftpConfig() { 
+            SftpConfig = new SftpConfig()
+            {
                 Host = "200.166.2.201",
                 Port = 4422,
                 User = "user",
                 Password = "ubnt",
             };
             RemotePath = "/AutoDownload";
-            CacheDir = "./Cache";
+            CacheDir = "D:/Cache";
             TempDir = "./temp";
             Password = "e10adc3949ba59abbe56e057f20f883e";
         }

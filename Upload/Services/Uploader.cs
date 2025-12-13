@@ -1,6 +1,5 @@
 ﻿using AutoDownload.Gui;
 using System;
-using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -25,7 +24,6 @@ namespace Upload.Services
         private AppShowerModel showerModel;
         private readonly string zipPassword;
         private readonly CheckConditon checkConditon;
-        private readonly FileProcessSevice fileProcess;
         internal Uploader(FormMain formMain, LocationManagement locationManagement, AccessUserControl accessControl)
         {
             _formMain = formMain;
@@ -33,7 +31,6 @@ namespace Upload.Services
             _treeVersion = new MyTreeFolderForApp(formMain.TreeVersion, zipPassword);
             checkConditon = new CheckConditon(formMain);
             _accessControl = accessControl;
-            fileProcess = FileProcessSevice.Instance;
             locationManagement.ShowVerionAction += (v) =>
             {
                 ResetData();
@@ -76,7 +73,7 @@ namespace Upload.Services
                     {
                         ////////////////////////////////
                         var appModel = showerModel.AppModel;
-                        if (await fileProcess.UploadFilesAsync(appModel.FileModels.Where(i => i is StoreFileModel).Select(i => i as StoreFileModel).ToList(), zipPassword))
+                        if (await FileProcessSevice.UploadFilesAsync(appModel.FileModels.Where(i => i is StoreFileModel).Select(i => i as StoreFileModel).ToList(), zipPassword))
                         {
                             appModel.FileModels = Util.FilterFileModelClass(appModel.FileModels);
                             //////////////////////////////
@@ -89,7 +86,6 @@ namespace Upload.Services
                                     {
                                         var appList = await ModelUtil.GetModelConfig<AppList>(sftp, appModel.RemoteAppListPath, zipPassword);
                                         canDeletes = await ModelUtil.GetCanDeleteFileModelsAsync(sftp, showerModel.RemoveFileModel, appList, zipPassword);
-                                        await locationManagement.UpdateProgramListItems(locationManagement?.Location?.AppName);
                                         return true;
                                     }
                                     return false;
@@ -97,9 +93,10 @@ namespace Upload.Services
                             }).WaitAsync<bool>();
                             if (success)
                             {
-                                await fileProcess.DeleteFilesAsync(canDeletes);
+                                await FileProcessSevice.DeleteFilesAsync(canDeletes);
+                                _ = locationManagement.UpdateProgramListItems(locationManagement?.Location?.AppName);
                                 LoggerBox.Addlog("Update done");
-                                LoggerBox.Addlog("Update done");
+                                MessageBox.Show("Update done");
                                 return;
                             }
                         }

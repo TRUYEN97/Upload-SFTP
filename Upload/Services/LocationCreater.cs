@@ -376,7 +376,7 @@ namespace Upload.Services
                 }).WaitAsync<bool>();
                 if (seccuess)
                 {
-                    await FileProcessSevice.Instance.DeleteFilesAsync(canDeletes);
+                    await FileProcessSevice.DeleteFilesAsync(canDeletes);
                     return true;
                 }
                 return false;
