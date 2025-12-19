@@ -15,6 +15,7 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
         private readonly int _maxWorkers;
         private readonly int _minWorkers;
         private readonly System.Timers.Timer timer;
+        private static readonly object _lockWoker = new object();
         protected BaseWorkerPool(int minWorkers, int maxWorkers, IJobQueue<T> queue)
         {
             ThreadPool.GetMinThreads(out int wk, out int completionPortThreads);
@@ -29,7 +30,17 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
                 timer.Stop();
                 try
                 {
-                    AutoScalerLoop();
+                    int queueCount = _queue.Count;
+                    int workerCount = _workers.Count;
+                    if (queueCount > workerCount * 5 || (queueCount > 0 && workerCount == 0))
+                    {
+                        AddWorker();
+                    }
+                    else
+                    if (queueCount < workerCount * 2 && (workerCount > 1 || queueCount == 0))
+                    {
+                        RemoveWorker();
+                    }
                 }
                 finally
                 {
@@ -42,48 +53,43 @@ namespace Upload.Services.Worker.Implement.WorkerPoolIplm
 
         public IProcessSignal Enqueue(IJob<T> sftpJob)
         {
+            if (_workers.Count == 0)
+            {
+                AddWorker();
+            }
             return _queue.Enqueue(sftpJob);
         }
 
         private void AddWorker()
         {
-            if (_workers.Count >= _maxWorkers)
-                return;
-            var cancelToken = new CancellationTokenSource();
-            var worker = CreateNewWorker(_queue);
-            if (worker == null) return;
-            Task.Run(async () => await worker.WorkerLoop(cancelToken.Token));
-            _workers.Add((worker, cancelToken));
+            lock (_lockWoker)
+            {
+                if (_workers.Count >= _maxWorkers)
+                    return;
+                var cancelToken = new CancellationTokenSource();
+                var worker = CreateNewWorker(_queue);
+                if (worker == null) return;
+                Task.Run(async () => await worker.WorkerLoop(cancelToken.Token));
+                _workers.Add((worker, cancelToken));
+            }
         }
 
         private void RemoveWorker()
         {
-            int count = _workers.Count;
-            if (count >= _minWorkers && count > 0)
+            lock (_lockWoker)
             {
-                try
+                int count = _workers.Count;
+                if (count >= _minWorkers && count > 0)
                 {
-                    var (worker, cts) = _workers[count - 1];
-                    cts?.Cancel();
-                    worker?.Dispose();
+                    try
+                    {
+                        var (worker, cts) = _workers[count - 1];
+                        cts?.Cancel();
+                        worker?.Dispose();
+                    }
+                    catch { }
+                    _workers.RemoveAt(count - 1);
                 }
-                catch { }
-                _workers.RemoveAt(count - 1);
-            }
-        }
-
-        private void AutoScalerLoop()
-        {
-            int queueCount = _queue.Count;
-            int workerCount = _workers.Count;
-            if (queueCount > workerCount * 5 || (queueCount > 0 && workerCount == 0))
-            {
-                AddWorker();
-            }
-            else
-            if (queueCount < workerCount * 2 && (workerCount > 1 || queueCount == 0))
-            {
-                RemoveWorker();
             }
         }
 
