@@ -142,27 +142,27 @@ namespace Upload.Services.Process
                 Execute = async (sftp) =>
                 {
                     var rs = new FileResultModel(model.ProgramPath, model.RemotePath);
-                    model.Md5 = Util.GetMD5HashFromFile(model.StorePath);
-                    model.RemotePath = Path.Combine(model.RemoteDir, $"{model.Md5}.zip");
-                    if (!cacheService.TryGetCache(model.Md5, out var cacheModel)
-                    && !cacheService.Add(model.StorePath, model.Md5, out cacheModel))
-                    {
-                        rs.SetResult(false, $"Add file({model.ProgramPath}) to Cache failed!");
-                        return rs;
-                    }
-                    if (!FileSizeConverter.TryGetMb(cacheModel.FilePath, out double mb))
-                    {
-                        rs.SetResult(false, $"Cache file({model.ProgramPath}: {cacheModel.FilePath}) is not exist!");
-                        return rs;
-                    }
-                    model.Mb = mb;
-                    if (!sftp.IsConnected)
-                    {
-                        rs.SetResult(false, $"Cannot connect to SFTP server: {model.ProgramPath}");
-                        return rs;
-                    }
                     try
                     {
+                        model.Md5 = Util.GetMD5HashFromFile(model.StorePath);
+                        model.RemotePath = Path.Combine(model.RemoteDir, $"{model.Md5}.zip");
+                        if (!cacheService.TryGetCache(model.Md5, out var cacheModel)
+                        && !cacheService.Add(model.StorePath, model.Md5, out cacheModel))
+                        {
+                            rs.SetResult(false, $"Add file({model.ProgramPath}) to Cache failed!");
+                            return rs;
+                        }
+                        if (!FileSizeConverter.TryGetMb(cacheModel.FilePath, out double mb))
+                        {
+                            rs.SetResult(false, $"Cache file({model.ProgramPath}: {cacheModel.FilePath}) is not exist!");
+                            return rs;
+                        }
+                        model.Mb = mb;
+                        if (!sftp.IsConnected)
+                        {
+                            rs.SetResult(false, $"Cannot connect to SFTP server: {model.ProgramPath}");
+                            return rs;
+                        }
                         if (await sftp.Exists(model.RemotePath))
                         {
                             rs.SetResult(true, $"Upload: {model.ProgramPath} -> {model.RemotePath} has exists");
