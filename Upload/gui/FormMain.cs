@@ -209,5 +209,10 @@ namespace Upload
             _stationAccessUserForm.LoadModel(stationAccUserPath);
             _stationAccessUserForm.ShowDialog();
         }
+
+        private void uiStoreToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            new UiStoreSetting().ShowDialog();
+        }
     }
 }

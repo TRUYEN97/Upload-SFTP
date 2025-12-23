@@ -149,6 +149,12 @@
     <Compile Include="gui\AccessUserListForm.Designer.cs">
       <DependentUpon>AccessUserListForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="gui\UiStoreSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="gui\UiStoreSetting.Designer.cs">
+      <DependentUpon>UiStoreSetting.cs</DependentUpon>
+    </Compile>
     <Compile Include="gui\UserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -244,6 +250,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="gui\AccessUserListForm.resx">
       <DependentUpon>AccessUserListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="gui\UiStoreSetting.resx">
+      <DependentUpon>UiStoreSetting.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="gui\UserForm.resx">
       <DependentUpon>UserForm.cs</DependentUpon>

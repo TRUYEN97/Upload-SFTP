@@ -76,12 +76,16 @@ namespace Upload
             this.cbEnabled = new System.Windows.Forms.CheckBox();
             this.panel4 = new System.Windows.Forms.Panel();
             this.txtMassage = new System.Windows.Forms.TextBox();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.uiStoreToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.uiStoreToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel1
@@ -99,16 +103,16 @@ namespace Upload
             this.panel1.Controls.Add(this.cbbStation);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.cbbProduct);
-            this.panel1.Location = new System.Drawing.Point(764, 11);
+            this.panel1.Location = new System.Drawing.Point(764, 7);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(319, 89);
+            this.panel1.Size = new System.Drawing.Size(320, 89);
             this.panel1.TabIndex = 0;
             // 
             // btAccessUser
             // 
             this.btAccessUser.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
             this.btAccessUser.Image = ((System.Drawing.Image)(resources.GetObject("btAccessUser.Image")));
-            this.btAccessUser.Location = new System.Drawing.Point(253, 55);
+            this.btAccessUser.Location = new System.Drawing.Point(268, 55);
             this.btAccessUser.Name = "btAccessUser";
             this.btAccessUser.Size = new System.Drawing.Size(33, 23);
             this.btAccessUser.TabIndex = 13;
@@ -118,7 +122,7 @@ namespace Upload
             // btSetting
             // 
             this.btSetting.Image = ((System.Drawing.Image)(resources.GetObject("btSetting.Image")));
-            this.btSetting.Location = new System.Drawing.Point(253, 16);
+            this.btSetting.Location = new System.Drawing.Point(268, 16);
             this.btSetting.Name = "btSetting";
             this.btSetting.Size = new System.Drawing.Size(33, 23);
             this.btSetting.TabIndex = 10;
@@ -174,9 +178,9 @@ namespace Upload
             // 
             this.cbbStation.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbStation.FormattingEnabled = true;
-            this.cbbStation.Location = new System.Drawing.Point(17, 57);
+            this.cbbStation.Location = new System.Drawing.Point(3, 57);
             this.cbbStation.Name = "cbbStation";
-            this.cbbStation.Size = new System.Drawing.Size(121, 21);
+            this.cbbStation.Size = new System.Drawing.Size(135, 21);
             this.cbbStation.TabIndex = 2;
             // 
             // label1
@@ -192,9 +196,9 @@ namespace Upload
             // 
             this.cbbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbProduct.FormattingEnabled = true;
-            this.cbbProduct.Location = new System.Drawing.Point(17, 16);
+            this.cbbProduct.Location = new System.Drawing.Point(3, 16);
             this.cbbProduct.Name = "cbbProduct";
-            this.cbbProduct.Size = new System.Drawing.Size(121, 21);
+            this.cbbProduct.Size = new System.Drawing.Size(135, 21);
             this.cbbProduct.TabIndex = 0;
             // 
             // cbbProgram
@@ -206,7 +210,7 @@ namespace Upload
             this.cbbProgram.FormattingEnabled = true;
             this.cbbProgram.Location = new System.Drawing.Point(531, 13);
             this.cbbProgram.Name = "cbbProgram";
-            this.cbbProgram.Size = new System.Drawing.Size(377, 21);
+            this.cbbProgram.Size = new System.Drawing.Size(371, 21);
             this.cbbProgram.TabIndex = 8;
             // 
             // panel2
@@ -216,10 +220,12 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel2.BackColor = System.Drawing.Color.MediumSeaGreen;
             this.panel2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.panel2.Controls.Add(this.panel4);
+            this.panel2.Controls.Add(this.panel1);
             this.panel2.Controls.Add(this.panel3);
-            this.panel2.Location = new System.Drawing.Point(-3, 106);
+            this.panel2.Location = new System.Drawing.Point(-3, 27);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1095, 457);
+            this.panel2.Size = new System.Drawing.Size(1095, 536);
             this.panel2.TabIndex = 1;
             // 
             // panel3
@@ -242,15 +248,15 @@ namespace Upload
             this.panel3.Controls.Add(this.btUpdate);
             this.panel3.Controls.Add(this.treeFolder);
             this.panel3.Controls.Add(this.cbEnabled);
-            this.panel3.Location = new System.Drawing.Point(3, 3);
+            this.panel3.Location = new System.Drawing.Point(6, 102);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1087, 449);
+            this.panel3.Size = new System.Drawing.Size(1081, 429);
             this.panel3.TabIndex = 15;
             // 
             // btDuplicateProgram
             // 
             this.btDuplicateProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDuplicateProgram.Location = new System.Drawing.Point(1022, 11);
+            this.btDuplicateProgram.Location = new System.Drawing.Point(1016, 11);
             this.btDuplicateProgram.Name = "btDuplicateProgram";
             this.btDuplicateProgram.Size = new System.Drawing.Size(62, 23);
             this.btDuplicateProgram.TabIndex = 24;
@@ -398,7 +404,7 @@ namespace Upload
             // btDeleteProgram
             // 
             this.btDeleteProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btDeleteProgram.Location = new System.Drawing.Point(968, 11);
+            this.btDeleteProgram.Location = new System.Drawing.Point(962, 11);
             this.btDeleteProgram.Name = "btDeleteProgram";
             this.btDeleteProgram.Size = new System.Drawing.Size(48, 23);
             this.btDeleteProgram.TabIndex = 14;
@@ -421,7 +427,7 @@ namespace Upload
             // btCreateProgram
             // 
             this.btCreateProgram.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btCreateProgram.Location = new System.Drawing.Point(914, 11);
+            this.btCreateProgram.Location = new System.Drawing.Point(908, 11);
             this.btCreateProgram.Name = "btCreateProgram";
             this.btCreateProgram.Size = new System.Drawing.Size(48, 23);
             this.btCreateProgram.TabIndex = 13;
@@ -443,7 +449,7 @@ namespace Upload
             this.panel5.Controls.Add(this.txtLaunchFile);
             this.panel5.Location = new System.Drawing.Point(528, 40);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(556, 180);
+            this.panel5.Size = new System.Drawing.Size(550, 180);
             this.panel5.TabIndex = 19;
             // 
             // label3
@@ -454,7 +460,7 @@ namespace Upload
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(8, 131);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(540, 19);
+            this.label3.Size = new System.Drawing.Size(534, 19);
             this.label3.TabIndex = 7;
             this.label3.Text = "Version";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -466,7 +472,7 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtVersion.Location = new System.Drawing.Point(7, 150);
             this.txtVersion.Name = "txtVersion";
-            this.txtVersion.Size = new System.Drawing.Size(541, 20);
+            this.txtVersion.Size = new System.Drawing.Size(535, 20);
             this.txtVersion.TabIndex = 6;
             this.txtVersion.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -478,7 +484,7 @@ namespace Upload
             this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label7.Location = new System.Drawing.Point(8, 5);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(540, 19);
+            this.label7.Size = new System.Drawing.Size(534, 19);
             this.label7.TabIndex = 5;
             this.label7.Text = "Launch file path";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -490,7 +496,7 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLastTimeUpdate.Location = new System.Drawing.Point(7, 108);
             this.txtLastTimeUpdate.Name = "txtLastTimeUpdate";
-            this.txtLastTimeUpdate.Size = new System.Drawing.Size(541, 20);
+            this.txtLastTimeUpdate.Size = new System.Drawing.Size(535, 20);
             this.txtLastTimeUpdate.TabIndex = 4;
             this.txtLastTimeUpdate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -502,19 +508,19 @@ namespace Upload
             this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.Location = new System.Drawing.Point(10, 48);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(540, 19);
+            this.label6.Size = new System.Drawing.Size(534, 19);
             this.label6.TabIndex = 3;
             this.label6.Text = "Icon file path";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // txtIconFilePath
+            // txtIconFile
             // 
             this.txtIconFile.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtIconFile.Location = new System.Drawing.Point(7, 67);
-            this.txtIconFile.Name = "txtIconFilePath";
-            this.txtIconFile.Size = new System.Drawing.Size(541, 20);
+            this.txtIconFile.Name = "txtIconFile";
+            this.txtIconFile.Size = new System.Drawing.Size(535, 20);
             this.txtIconFile.TabIndex = 2;
             this.txtIconFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -526,7 +532,7 @@ namespace Upload
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(8, 88);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(540, 19);
+            this.label4.Size = new System.Drawing.Size(534, 19);
             this.label4.TabIndex = 1;
             this.label4.Text = "Last time update";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -538,7 +544,7 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txtLaunchFile.Location = new System.Drawing.Point(7, 25);
             this.txtLaunchFile.Name = "txtLaunchFile";
-            this.txtLaunchFile.Size = new System.Drawing.Size(541, 20);
+            this.txtLaunchFile.Size = new System.Drawing.Size(535, 20);
             this.txtLaunchFile.TabIndex = 0;
             this.txtLaunchFile.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -568,9 +574,9 @@ namespace Upload
             this.btUpdate.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.btUpdate.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btUpdate.Location = new System.Drawing.Point(124, 419);
+            this.btUpdate.Location = new System.Drawing.Point(124, 399);
             this.btUpdate.Name = "btUpdate";
-            this.btUpdate.Size = new System.Drawing.Size(853, 24);
+            this.btUpdate.Size = new System.Drawing.Size(847, 24);
             this.btUpdate.TabIndex = 17;
             this.btUpdate.Text = "Update";
             this.btUpdate.UseVisualStyleBackColor = true;
@@ -582,7 +588,7 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.treeFolder.Location = new System.Drawing.Point(3, 226);
             this.treeFolder.Name = "treeFolder";
-            this.treeFolder.Size = new System.Drawing.Size(1081, 190);
+            this.treeFolder.Size = new System.Drawing.Size(1075, 170);
             this.treeFolder.TabIndex = 12;
             // 
             // cbEnabled
@@ -604,7 +610,7 @@ namespace Upload
             | System.Windows.Forms.AnchorStyles.Right)));
             this.panel4.BackColor = System.Drawing.Color.DarkGreen;
             this.panel4.Controls.Add(this.txtMassage);
-            this.panel4.Location = new System.Drawing.Point(6, 7);
+            this.panel4.Location = new System.Drawing.Point(6, 3);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(752, 97);
             this.panel4.TabIndex = 2;
@@ -624,16 +630,41 @@ namespace Upload
             this.txtMassage.TabIndex = 2;
             this.txtMassage.TabStop = false;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uiStoreToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1088, 24);
+            this.menuStrip1.TabIndex = 2;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // uiStoreToolStripMenuItem
+            // 
+            this.uiStoreToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.uiStoreToolStripMenuItem1});
+            this.uiStoreToolStripMenuItem.Name = "uiStoreToolStripMenuItem";
+            this.uiStoreToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.uiStoreToolStripMenuItem.Text = "Edit";
+            // 
+            // uiStoreToolStripMenuItem1
+            // 
+            this.uiStoreToolStripMenuItem1.Name = "uiStoreToolStripMenuItem1";
+            this.uiStoreToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.uiStoreToolStripMenuItem1.Text = "UiStore";
+            this.uiStoreToolStripMenuItem1.Click += new System.EventHandler(this.uiStoreToolStripMenuItem1_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DarkGreen;
             this.ClientSize = new System.Drawing.Size(1088, 561);
-            this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Upload";
@@ -648,7 +679,10 @@ namespace Upload
             this.panel5.PerformLayout();
             this.panel4.ResumeLayout(false);
             this.panel4.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -699,6 +733,9 @@ namespace Upload
         private System.Windows.Forms.Button btAccessUser;
         private System.Windows.Forms.CheckBox cbCloseAndClear;
         private System.Windows.Forms.Button btDuplicateProgram;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem uiStoreToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem uiStoreToolStripMenuItem1;
 
         public System.Windows.Forms.ComboBox CbbStation { get { return cbbStation; } }
         public System.Windows.Forms.ComboBox CbbProduct { get { return cbbProduct; } }

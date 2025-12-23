@@ -29,8 +29,20 @@ namespace Upload.Services.Worker.Implement.WorkerIplm
 
         protected override void OnAfterShift()
         {
-            _client?.Disconnect();
-            _client?.Dispose();
+            try
+            {
+                _client?.Disconnect();
+            }
+            catch
+            {
+            }
+            try
+            {
+                _client?.Dispose();
+            }
+            catch
+            {
+            }
         }
     }
 }

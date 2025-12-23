@@ -157,3 +157,5 @@ D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.CoreCompileInputs.cache
 D:\2.C#\Upload\Upload\obj\Debug\Upload.csproj.Up2Date
 D:\2.C#\Upload\Upload\obj\Debug\Upload.exe
 D:\2.C#\Upload\Upload\obj\Debug\Upload.pdb
+D:\2.C#\Upload\Upload\obj\Debug\Upload.exe.config
+D:\2.C#\Upload\Upload\obj\Debug\Upload.gui.UiStoreSetting.resources
